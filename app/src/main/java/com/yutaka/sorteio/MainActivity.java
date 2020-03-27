@@ -36,16 +36,16 @@ public class MainActivity extends AppCompatActivity {
 
         quantidadeNum2.onEditorAction(EditorInfo.IME_ACTION_DONE); // esconde teclado ao clicar no botão do programa
 
-        if (verificador1.equals("") || verificador2.equals("")){
+        if (verificador1.equals("") || verificador2.equals("")){  // verifica se o usuário digitou número
             texto1.setText("Digite um número!");
         } else{
             int numeroUsuario1 = Integer.parseInt(quantidadeNum1.getText().toString());
             int numeroUsuario2 = Integer.parseInt(quantidadeNum2.getText().toString());
-            if(numeroUsuario1 > numeroUsuario2){
+            if(numeroUsuario1 > numeroUsuario2){          // verifica se o meanor número é menor do que o maior número
                 texto1.setText("Digite um intervalo válido");
             }else {
                 Random random = new Random();
-                int numeroSorteado = random.nextInt((numeroUsuario2 - numeroUsuario1)+1)+numeroUsuario1;
+                int numeroSorteado = random.nextInt((numeroUsuario2 - numeroUsuario1)+1)+numeroUsuario1;  // gera número aleatório de acordo com o Intervado
                 texto1.setText("O número sorteado é:");
                 texto2.setText("" + numeroSorteado);
                 texto2.setVisibility(View.VISIBLE);
