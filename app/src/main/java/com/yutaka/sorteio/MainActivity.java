@@ -79,28 +79,33 @@ public class MainActivity extends AppCompatActivity {
         } else{
             int numeroUsuario1 = Integer.parseInt(quantidadeNum1.getText().toString());
             int numeroUsuario2 = Integer.parseInt(quantidadeNum2.getText().toString());
-            int numeroUsuarioRep = Integer.parseInt(quantidadeRepet.getText().toString());
-            if(numeroUsuario1 > numeroUsuario2){          // verifica se o meanor número é menor do que o maior número
+          //  int numeroUsuarioRep = Integer.parseInt(quantidadeRepet.getText().toString());
+            if(numeroUsuario1 > numeroUsuario2){          // verifica se o menor número é menor do que o maior número
                 texto1.setText("Digite um intervalo válido");
             }else {
                 if (switchState == true) {
-                    if (verificador3.equals("") || numeroUsuarioRep == 0){
-                        texto1.setText("Digite a quantidade de repetições");
+                    if (verificador3.equals("")){
+                        texto1.setText("Digite a quantidade de sorteios");
                     } else {
-                        dialogoResultado.resultadoTeste = "";
-                        int contador = 0;
-                        int numeroUsuario3 = Integer.parseInt(quantidadeRepet.getText().toString());
-                        int[] numSorteados = new int[numeroUsuario3];
-                        texto1.setVisibility(View.GONE);
-                        Random random = new Random();
-                        do {
-                            int numeroSorteado = random.nextInt((numeroUsuario2 - numeroUsuario1) + 1) + numeroUsuario1;  // gera número aleatório de acordo com o Intervado
-                            numSorteados[contador] = numeroSorteado;
-                            contador++;
-                            dialogoResultado.resultadoTeste += contador +"º resultado é: "+numeroSorteado+"\n"; // DEFINE ESCRITA MENSAGEM
-                            // FALTA GUARDAR
-                        } while (contador < numeroUsuario3);
-                        openDialog(); // ABRE ABA MENSAGEM
+                        int numeroUsuarioRep = Integer.parseInt(quantidadeRepet.getText().toString());
+                        if(numeroUsuarioRep == 0){
+                            texto1.setText("Digite um número maior do que 0");
+                        } else {
+                            dialogoResultado.resultadoTeste = "";
+                            int contador = 0;
+                            int numeroUsuario3 = Integer.parseInt(quantidadeRepet.getText().toString());
+                            int[] numSorteados = new int[numeroUsuario3];
+                            texto1.setVisibility(View.GONE);
+                            Random random = new Random();
+                            do {
+                                int numeroSorteado = random.nextInt((numeroUsuario2 - numeroUsuario1) + 1) + numeroUsuario1;  // gera número aleatório de acordo com o Intervado
+                                numSorteados[contador] = numeroSorteado;
+                                contador++;
+                                dialogoResultado.resultadoTeste += contador + "º resultado é: " + numeroSorteado + "\n"; // DEFINE ESCRITA MENSAGEM
+                                // FALTA GUARDAR
+                            } while (contador < numeroUsuario3);
+                            openDialog(); // ABRE ABA MENSAGEM
+                        }
                     }
 
                 } else {
