@@ -1,7 +1,10 @@
 package com.yutaka.sorteio;
 
+import androidx.annotation.DrawableRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.media.Image;
 import android.os.Bundle;
@@ -20,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Switch repetirSwitch;
     private TextView quantidadeRepet;
-    DialogoResultado dialogoResultado = new DialogoResultado(); // Chamando Classe DialogoResultado
+    private String resultadoRep;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +37,23 @@ public class MainActivity extends AppCompatActivity {
         adicionarListener(); // Listener do Switch
     }
 
-    public void openDialog(){  // METODO QUE MOSTRA MENSAGEM
-        dialogoResultado.show(getSupportFragmentManager(), "teste");
-    }
+   public void openDialog(){ // METODO QUE MOSTRA MENSAGEM
+       AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+
+       dialog.setTitle("Resultado")
+               .setMessage(resultadoRep)
+               .setIcon(R.drawable.ic_announcement_blue_24dp);
+
+       dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+           @Override
+           public void onClick(DialogInterface dialog, int which) {
+
+           }
+       });
+
+       dialog.create()
+               .show();
+   }
 
 
 
@@ -79,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
         } else{
             int numeroUsuario1 = Integer.parseInt(quantidadeNum1.getText().toString());
             int numeroUsuario2 = Integer.parseInt(quantidadeNum2.getText().toString());
-          //  int numeroUsuarioRep = Integer.parseInt(quantidadeRepet.getText().toString());
             if(numeroUsuario1 > numeroUsuario2){          // verifica se o menor número é menor do que o maior número
                 texto1.setText("Digite um intervalo válido");
             }else {
@@ -91,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                         if(numeroUsuarioRep == 0){
                             texto1.setText("Digite um número maior do que 0");
                         } else {
-                            dialogoResultado.resultadoTeste = "";
+                            resultadoRep = "";
                             int contador = 0;
                             int numeroUsuario3 = Integer.parseInt(quantidadeRepet.getText().toString());
                             int[] numSorteados = new int[numeroUsuario3];
@@ -101,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                                 int numeroSorteado = random.nextInt((numeroUsuario2 - numeroUsuario1) + 1) + numeroUsuario1;  // gera número aleatório de acordo com o Intervado
                                 numSorteados[contador] = numeroSorteado;
                                 contador++;
-                                dialogoResultado.resultadoTeste += contador + "º resultado é: " + numeroSorteado + "\n"; // DEFINE ESCRITA MENSAGEM
+                                resultadoRep += contador + "º resultado é: " + numeroSorteado + "\n"; // DEFINE ESCRITA MENSAGEM
                                 // FALTA GUARDAR
                             } while (contador < numeroUsuario3);
                             openDialog(); // ABRE ABA MENSAGEM
