@@ -79,11 +79,12 @@ public class MainActivity extends AppCompatActivity {
         } else{
             int numeroUsuario1 = Integer.parseInt(quantidadeNum1.getText().toString());
             int numeroUsuario2 = Integer.parseInt(quantidadeNum2.getText().toString());
+            int numeroUsuarioRep = Integer.parseInt(quantidadeRepet.getText().toString());
             if(numeroUsuario1 > numeroUsuario2){          // verifica se o meanor número é menor do que o maior número
                 texto1.setText("Digite um intervalo válido");
             }else {
                 if (switchState == true) {
-                    if (verificador3.equals("")){
+                    if (verificador3.equals("") || numeroUsuarioRep == 0){
                         texto1.setText("Digite a quantidade de repetições");
                     } else {
                         dialogoResultado.resultadoTeste = "";
